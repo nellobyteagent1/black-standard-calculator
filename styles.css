@@ -1,0 +1,232 @@
+:root {
+  color-scheme: dark;
+  --bg: #050505;
+  --bg-accent: #0d0d0f;
+  --panel: rgba(16, 16, 18, 0.94);
+  --panel-edge: rgba(255, 255, 255, 0.06);
+  --display: #000000;
+  --display-edge: rgba(255, 255, 255, 0.08);
+  --key: #141416;
+  --key-hover: #1d1d21;
+  --key-press: #26262c;
+  --utility: #1c1c20;
+  --operator: #7c3aed;
+  --operator-hover: #8f4dff;
+  --equals: #06b6d4;
+  --equals-hover: #22d3ee;
+  --text: #f5f7fb;
+  --text-dim: #a1a1aa;
+  --danger: #fb7185;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(124, 58, 237, 0.2), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.12), transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-accent) 100%);
+  color: var(--text);
+}
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(100%, 430px);
+}
+
+.calculator {
+  backdrop-filter: blur(18px);
+  background: linear-gradient(180deg, rgba(24, 24, 28, 0.94), rgba(12, 12, 14, 0.98));
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.calculator__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+}
+
+.calculator__header h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 650;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #34d399, #059669);
+  box-shadow: 0 0 18px rgba(52, 211, 153, 0.7);
+  margin-top: 6px;
+}
+
+.display-panel {
+  background: linear-gradient(180deg, #0a0a0b, var(--display));
+  border: 1px solid var(--display-edge);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 16px;
+  min-height: 146px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.display-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+.hint {
+  opacity: 0.85;
+}
+
+.display-expression,
+.display-result {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.display-expression {
+  min-height: 24px;
+  color: var(--text-dim);
+  font-size: 0.98rem;
+}
+
+.display-result {
+  min-height: 52px;
+  font-size: clamp(2.4rem, 7vw, 3.5rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.display-result.is-error {
+  color: var(--danger);
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.key {
+  border: none;
+  border-radius: var(--radius-md);
+  min-height: 72px;
+  background: linear-gradient(180deg, #18181b, var(--key));
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover {
+  background: linear-gradient(180deg, #202025, var(--key-hover));
+  transform: translateY(-1px);
+}
+
+.key:active {
+  background: linear-gradient(180deg, #2a2a31, var(--key-press));
+  transform: translateY(1px) scale(0.99);
+}
+
+.key:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.95);
+  outline-offset: 2px;
+}
+
+.key--utility {
+  background: linear-gradient(180deg, #232328, var(--utility));
+  color: #e4e4e7;
+}
+
+.key--operator {
+  background: linear-gradient(180deg, #8b5cf6, var(--operator));
+}
+
+.key--operator:hover {
+  background: linear-gradient(180deg, #9f67ff, var(--operator-hover));
+}
+
+.key--equals {
+  grid-column: span 2;
+  background: linear-gradient(180deg, #22d3ee, var(--equals));
+  color: #03131a;
+}
+
+.key--equals:hover {
+  background: linear-gradient(180deg, #5ee7f5, var(--equals-hover));
+}
+
+.key--zero {
+  grid-column: span 2;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 0;
+  }
+
+  .app-shell {
+    width: 100%;
+  }
+
+  .calculator {
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .display-panel {
+    min-height: 180px;
+  }
+
+  .key {
+    min-height: 68px;
+  }
+}
